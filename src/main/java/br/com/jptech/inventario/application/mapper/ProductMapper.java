@@ -7,8 +7,9 @@ import br.com.jptech.inventario.infra.entitie.ProductEntity;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
-@Component
 public interface ProductMapper {
     ProductDto productToProductDto(ProductDomain productDomain);
     ProductDomain productDtoToProduct(ProductDto productDto);
@@ -18,4 +19,8 @@ public interface ProductMapper {
     ProductEntity productDomainToProductEntity(ProductDomain productDomain);
 
     ProductResponse productDomainToProductResponse(ProductDomain productDomain);
+
+    List<ProductDomain> productEntityListToProductDomainList(List<ProductEntity> productEntityList);
+
+    List<ProductResponse> productDomainListToProductResponseList(List<ProductDomain> productDomainList);
 }

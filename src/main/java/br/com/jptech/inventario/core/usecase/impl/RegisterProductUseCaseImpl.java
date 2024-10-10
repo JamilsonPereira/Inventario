@@ -9,16 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
-@Component
 public class RegisterProductUseCaseImpl implements RegisterProductUseCase {
 
-
-    @Autowired
     private RegisterProductRepository registerProductRepository;
 
     @Override
     public ProductDomain saveProduct(ProductDomain product) {
         System.out.println("Product: " + product);
-       return registerProductRepository.save(product);
+        return registerProductRepository.save(product);
     }
 }
