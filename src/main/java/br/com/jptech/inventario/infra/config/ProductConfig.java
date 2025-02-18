@@ -1,22 +1,10 @@
 package br.com.jptech.inventario.infra.config;
 
 import br.com.jptech.inventario.application.mapper.ProductMapper;
-import br.com.jptech.inventario.core.gateway.DeleteProductByIDRepository;
-import br.com.jptech.inventario.core.gateway.FindAllProductsRepository;
-import br.com.jptech.inventario.core.gateway.FindProductByIdRepository;
-import br.com.jptech.inventario.core.gateway.RegisterProductRepository;
-import br.com.jptech.inventario.core.usecase.DeleteProductUseCase;
-import br.com.jptech.inventario.core.usecase.FindAllProductsUseCase;
-import br.com.jptech.inventario.core.usecase.FindProductByIdUseCase;
-import br.com.jptech.inventario.core.usecase.RegisterProductUseCase;
-import br.com.jptech.inventario.core.usecase.impl.DeleteProductUseCaseImpl;
-import br.com.jptech.inventario.core.usecase.impl.FindAllProductsUseCaseImpl;
-import br.com.jptech.inventario.core.usecase.impl.FindProductByIdUseCaseImpl;
-import br.com.jptech.inventario.core.usecase.impl.RegisterProductUseCaseImpl;
-import br.com.jptech.inventario.infra.persistence.DeleteProductByIdByIDRepositoryImpl;
-import br.com.jptech.inventario.infra.persistence.FindAllProductsRepositoryImpl;
-import br.com.jptech.inventario.infra.persistence.FindProductByIdRepositoryImpl;
-import br.com.jptech.inventario.infra.persistence.RegisterProductRepositoryImpl;
+import br.com.jptech.inventario.core.gateway.*;
+import br.com.jptech.inventario.core.usecase.*;
+import br.com.jptech.inventario.core.usecase.impl.*;
+import br.com.jptech.inventario.infra.persistence.*;
 import br.com.jptech.inventario.infra.repository.ProductRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,5 +51,16 @@ public class ProductConfig {
     @Bean
     public DeleteProductByIDRepository deleteProductRepository(ProductRepository productRepository) {
         return new DeleteProductByIdByIDRepositoryImpl(productRepository);
+    }
+
+
+   @Bean
+    public PatchProductUseCase patchProductUseCase(PatchProductRepository patchProductRepository, FindProductByIdRepository findProductByIdRepository) {
+        return new PatchProductUseCaseImpl(patchProductRepository, findProductByIdRepository);
+    }
+
+    @Bean
+    public PatchProductRepository patchProductRepository(ProductRepository productRepository, ProductMapper productMapper) {
+        return new PatchProductRepositoryImpl(productRepository, productMapper);
     }
 }

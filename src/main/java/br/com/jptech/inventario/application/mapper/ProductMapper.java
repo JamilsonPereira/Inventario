@@ -23,4 +23,5 @@ public interface ProductMapper {
     List<ProductDomain> productEntityListToProductDomainList(List<ProductEntity> productEntityList);
 
     List<ProductResponse> productDomainListToProductResponseList(List<ProductDomain> productDomainList);
+
 }

@@ -4,10 +4,7 @@ import br.com.jptech.inventario.application.dto.ProductDto;
 import br.com.jptech.inventario.application.dto.ProductResponse;
 import br.com.jptech.inventario.application.mapper.ProductMapper;
 import br.com.jptech.inventario.core.domain.ProductDomain;
-import br.com.jptech.inventario.core.usecase.DeleteProductUseCase;
-import br.com.jptech.inventario.core.usecase.FindAllProductsUseCase;
-import br.com.jptech.inventario.core.usecase.FindProductByIdUseCase;
-import br.com.jptech.inventario.core.usecase.RegisterProductUseCase;
+import br.com.jptech.inventario.core.usecase.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +28,8 @@ public class ProductController {
 
     private DeleteProductUseCase deleteProductUseCase;
 
+    private PatchProductUseCase patchProductUseCase;
+
     @PostMapping
     public ResponseEntity<ProductResponse> registerProduct(@RequestBody ProductDto productDto) {
         ProductDomain productDomain = registerProductUseCase.saveProduct(productMapper.productDtoToProduct(productDto));
@@ -52,5 +51,12 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable("id") Long id) {
         deleteProductUseCase.deleteProduct(id);
+    }
+
+    @PutMapping("/{id}")
+    public void patchProduct(@RequestBody ProductDto productDto, @PathVariable("id") Long id) {
+        ProductDomain productDomain = productMapper.productDtoToProduct(productDto);
+
+        patchProductUseCase.patchProduct(productDomain, id);
     }
 }
