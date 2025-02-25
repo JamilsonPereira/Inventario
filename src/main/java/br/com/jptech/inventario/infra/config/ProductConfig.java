@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 public class ProductConfig {
 
     @Bean
-    public RegisterProductUseCase registerProductUseCase(RegisterProductRepository registerProductRepository) {
-        return new RegisterProductUseCaseImpl(registerProductRepository);
+    public RegisterProductUseCase registerProductUseCase(RegisterProductRepository registerProductRepository, FindProductByIdRepository findProductByIdRepository) {
+        return new RegisterProductUseCaseImpl(registerProductRepository, findProductByIdRepository);
     }
 
     @Bean
