@@ -13,8 +13,8 @@ public class RegisterSupplierUseCaseImpl implements RegisterSupplierUseCase {
     RegisterSupllierRepository registerSupllierRepository;
 
     @Override
-    public void registerSupplier(SupplierDomain supplierDomain) {
+    public SupplierDomain registerSupplier(SupplierDomain supplierDomain) {
 
-        registerSupllierRepository.save(supplierDomain);
+        return registerSupllierRepository.save(supplierDomain);
     }
 }

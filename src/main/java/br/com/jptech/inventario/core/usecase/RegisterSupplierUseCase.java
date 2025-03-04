@@ -4,5 +4,5 @@ import br.com.jptech.inventario.core.domain.SupplierDomain;
 
 public interface RegisterSupplierUseCase {
 
-    void registerSupplier(SupplierDomain supplierDomain);
+    SupplierDomain registerSupplier(SupplierDomain supplierDomain);
 }

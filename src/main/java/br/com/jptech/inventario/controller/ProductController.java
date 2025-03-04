@@ -1,6 +1,6 @@
 package br.com.jptech.inventario.controller;
 
-import br.com.jptech.inventario.application.dto.ProductDto;
+import br.com.jptech.inventario.application.dto.ProductRequest;
 import br.com.jptech.inventario.application.dto.ProductResponse;
 import br.com.jptech.inventario.application.mapper.ProductMapper;
 import br.com.jptech.inventario.core.domain.ProductDomain;
@@ -31,8 +31,8 @@ public class ProductController {
     private PatchProductUseCase patchProductUseCase;
 
     @PostMapping
-    public ResponseEntity<ProductResponse> registerProduct(@RequestBody ProductDto productDto) {
-        ProductDomain productDomain = registerProductUseCase.saveProduct(productMapper.productDtoToProduct(productDto));
+    public ResponseEntity<ProductResponse> registerProduct(@RequestBody ProductRequest productRequest) {
+        ProductDomain productDomain = registerProductUseCase.saveProduct(productMapper.productDtoToProduct(productRequest));
         return ResponseEntity.ok((productMapper.productDomainToProductResponse(productDomain)));
     }
 
@@ -54,8 +54,8 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public void patchProduct(@RequestBody ProductDto productDto, @PathVariable("id") Long id) {
-        ProductDomain productDomain = productMapper.productDtoToProduct(productDto);
+    public void patchProduct(@RequestBody ProductRequest productRequest, @PathVariable("id") Long id) {
+        ProductDomain productDomain = productMapper.productDtoToProduct(productRequest);
 
         patchProductUseCase.patchProduct(productDomain, id);
     }

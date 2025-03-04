@@ -4,5 +4,5 @@ import br.com.jptech.inventario.core.domain.SupplierDomain;
 
 public interface RegisterSupllierRepository {
 
-    void save(SupplierDomain supplierDomain);
+    SupplierDomain save(SupplierDomain supplierDomain);
 }
